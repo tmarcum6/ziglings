@@ -35,20 +35,25 @@ pub fn main() void {
     // In this contrived example, we've decided to allocate some
     // arrays using a variable count! But something's missing...
     //
-    var count = 0;
+    comptime var count: u8 = 0;
 
+    @compileLog("Count at compile time: ", count);
     count += 1;
     const a1: [count]u8 = .{'A'} ** count;
 
+    @compileLog("Count at compile time: ", count);
     count += 1;
     const a2: [count]u8 = .{'B'} ** count;
 
+    @compileLog("Count at compile time: ", count);
     count += 1;
     const a3: [count]u8 = .{'C'} ** count;
 
+    @compileLog("Count at compile time: ", count);
     count += 1;
     const a4: [count]u8 = .{'D'} ** count;
 
+    @compileLog("Count at compile time: ", count);
     print("{s} {s} {s} {s}\n", .{ a1, a2, a3, a4 });
 
     // Builtin BONUS!
@@ -60,5 +65,5 @@ pub fn main() void {
     //
     // Try uncommenting this line and playing around with it
     // (copy it, move it) to see what it does:
-    //@compileLog("Count at compile time: ", count);
+    @compileLog("Count at compile time: ", count);
 }
