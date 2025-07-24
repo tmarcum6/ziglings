@@ -64,7 +64,7 @@ pub fn main() void {
 //     "0"(bool):true
 //
 // You'll be putting this together. But don't worry, everything
-// you need is documented in the comments.
+// you need is documyented in the comments.
 fn printTuple(tuple: anytype) void {
     // 1. Get a list of fields in the input 'tuple'
     // parameter. You'll need:
@@ -82,14 +82,14 @@ fn printTuple(tuple: anytype) void {
     //         @typeInfo(Circle).@"struct".fields
     //
     // This will be an array of StructFields.
-    const fields = ???;
+    const fields = @typeInfo(@TypeOf(tuple)).@"struct".fields;
 
     // 2. Loop through each field. This must be done at compile
     // time.
     //
     //     Hint: remember 'inline' loops?
     //
-    for (fields) |field| {
+    inline for (fields) |field| {
         // 3. Print the field's name, type, and value.
         //
         //     Each 'field' in this loop is one of these:
@@ -119,9 +119,9 @@ fn printTuple(tuple: anytype) void {
         //
         // The first field should print as: "0"(bool):true
         print("\"{s}\"({any}):{any} ", .{
-            field.???,
-            field.???,
-            ???,
+            field.name,
+            field.type,
+            @field(tuple, field.name),
         });
     }
 }
